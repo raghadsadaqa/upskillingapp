@@ -1,0 +1,36 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form id="menuform">
+		<p:menubar>
+
+			<p:menuitem value="#{msg.menu_home}" outcome="/screen.xhtml" />
+
+			<p:submenu label="#{msg.menu_tables}">
+				<p:menuitem value="#{msg.menu_university}" outcome="/items/university.xhtml" />
+				<p:menuitem value="#{msg.menu_school}" outcome="/items/school.xhtml" />
+				<p:menuitem value="#{msg.menu_program}" outcome="/items/program.xhtml" />
+				<p:menuitem value="#{msg.menu_training_course}" outcome="/items/courses.xhtml" />
+				<p:menuitem value="#{msg.menu_student}" outcome="/items/student.xhtml" />
+				<p:menuitem value="#{msg.menu_stc}" outcome="/items/student-training-course.xhtml" />
+				<p:menuitem value="#{msg.menu_student_result}" outcome="/items/student-result.xhtml" />
+			</p:submenu>
+
+			<p:submenu label="#{msg.menu_adding}">
+				<p:menuitem value="#{msg.menu_add_university}" outcome="/items/add-university" />
+				<p:menuitem value="#{msg.menu_add_school}" outcome="/items/add-school" />
+				<p:menuitem value="#{msg.menu_add_program}" outcome="/items/add-program" />
+				<p:menuitem value="#{msg.menu_add_training_course}" outcome="/items/add-course" />
+				<p:menuitem value="#{msg.menu_add_student}" outcome="/items/add-student" />
+				<p:menuitem value="#{msg.menu_add_stc}" outcome="/items/add-stc" />
+				<p:menuitem value="#{msg.menu_add_student_result}" outcome="/items/add-student-result" />
+			</p:submenu>
+
+			<p:menuitem value="#{msg.menu_logout}" action="#{mbLog.logout()}" ajax="false" />
+		</p:menubar>
+	</h:form>
+
+</ui:composition>
+

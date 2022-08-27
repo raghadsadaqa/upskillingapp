@@ -1,0 +1,70 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">Schools</ui:define>
+	
+	<ui:define name="content">
+	
+	<h:form id="SchoolForm">
+		<p:panel>
+			<p:dataTable value="#{mbSchool.table}" var="s">
+				<f:facet name="header">
+					<h:outputText value="#{msg.menu_school}"/>
+				</f:facet>
+
+				<p:column headerText="#{msg.lbl_id}" sortBy="#{s.id}" filterBy="#{s.id}" filterMatchMode="contains">
+					<h:outputText value="#{s.id}" />
+				</p:column>
+				
+				<p:column headerText="#{msg.lbl_aname}" sortBy="#{s.aname}" filterBy="#{s.aname}" filterMatchMode="contains">
+					<h:outputText value="#{s.aname}" />
+				</p:column>
+				
+				<p:column headerText="#{msg.lbl_ename}" sortBy="#{s.ename}" filterBy="#{s.ename}" filterMatchMode="contains">
+					<h:outputText value="#{s.ename}" />
+				</p:column>
+				
+				<p:column headerText="#{msg.btn_edit}">
+					<p:commandButton value="#{msg.btn_edit}" update=":SchoolForm:editpnl" onclick="PF('schooldlg').show()">
+					<f:setPropertyActionListener value="#{s}" target="#{mbSchool.school}"/>
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="#{msg.btn_remove}">
+					<p:commandButton value="#{msg.btn_remove}" action="#{mbSchool.deleteSchool()}" ajax="false">
+						<f:setPropertyActionListener value="#{s}" target="#{mbSchool.school}" />
+					</p:commandButton>
+				</p:column>
+				
+
+				<f:facet name="footer">
+					<h:outputText value="#{msg.lbl_total} - #{msg.menu_school} : #{mbSchool.table.size()} " />
+				</f:facet>
+			</p:dataTable>
+			
+			<p:commandButton value="#{msg.btn_report}" action="#{mbSchool.runSchoolReport()}" ajax="false" />
+			
+		</p:panel>
+		
+		<p:dialog header="Edit School" widgetVar="schooldlg">
+			<p:panelGrid id="editpnl" columns="2">
+
+				<p:outputLabel value="#{msg.lbl_id}" />
+				<h:outputText value="#{mbSchool.school.id}" />
+
+				<p:outputLabel value="#{msg.lbl_aname}" />
+				<h:inputText value="#{mbSchool.school.aname}" />
+
+				<p:outputLabel value="#{msg.lbl_ename}" />
+				<h:inputText value="#{mbSchool.school.ename}" />
+
+				<f:facet name="footer">
+					<p:commandButton value="#{msg.btn_save}" action="#{mbSchool.updateSchool()}" ajax="false" />
+					<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('schooldlg').hide()" />
+				</f:facet>
+			</p:panelGrid>
+		</p:dialog>
+		
+	</h:form>
+	</ui:define>
+</ui:composition>

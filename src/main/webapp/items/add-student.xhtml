@@ -1,0 +1,114 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Adding Student</ui:define>
+
+	<ui:define name="content">
+		<div align="center">
+			<p:spacer height="50" />
+			<h:form id="studentform">
+				<p:growl showDetail="true">
+					<p:autoUpdate />
+				</p:growl>
+				<p:panelGrid columns="6">
+					<f:facet name="header">
+						<h:outputText value="#{msg.menu_add_student}" />
+					</f:facet>
+					
+					
+					<p:outputLabel value="#{msg.menu_student} - #{msg.lbl_id}" for="id" />
+					<p:inputNumber id="id" value="#{mbStudents.student.studentid}" decimalPlaces="0" decimalSeparator=" " thousandSeparator=" "
+						required="true" requiredMessage="#{msg.msg_required} - #{msg.menu_student} - #{msg.lbl_id}"
+						validatorMessage="#{msg.msg_validation} - #{msg.menu_student} - #{msg.lbl_id}" />
+					
+					
+					
+					<p:outputLabel value="#{msg.lbl_aname}" for="aname" />
+					<p:inputText id="aname" value="#{mbStudents.student.aname}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_aname}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_aname}" />
+						
+						
+					<p:outputLabel value="#{msg.lbl_ename}" for="ename" />
+					<p:inputText id="ename" value="#{mbStudents.student.ename}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_ename}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_ename}" />
+
+					<p:outputLabel value="#{msg.lbl_mobile}" for="NUM" />
+					<p:inputText id="NUM" value="#{mbStudents.student.mobile}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_mobile}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_mobile}">
+						<f:validateRegex pattern="^07[789][0-9]{7}$" />
+					</p:inputText>
+
+					<p:outputLabel value="#{msg.lbl_birthdate}" for="birthdate" />
+					<p:calendar id="birthdate" value="#{mbStudents.student.birthDate}" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.lbl_birthdate}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_birthdate}" 
+						/>
+
+					<p:outputLabel value="#{msg.lbl_sex}" for="sex" />
+					<p:selectOneRadio id="sex" value="#{mbStudents.student.sex}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_sex}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_sex}">
+						<f:selectItem itemLabel="Male" itemValue="1" />
+						<f:selectItem itemLabel="Female" itemValue="2" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="#{msg.lbl_email}" for="email" />
+					<p:inputText id="email" value="#{mbStudents.student.email}" type="email" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.lbl_email}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_email}">
+						<f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$" />
+					</p:inputText>
+
+					<p:outputLabel value="#{msg.menu_university} - #{msg.lbl_id}" for="Uid" />
+					<p:selectOneMenu value="#{mbStudents.student.university.id}" id="Uid"
+						requiredMessage="#{msg.msg_required} -#{msg.menu_student} - #{msg.lbl_id}">
+						<f:selectItem itemLabel="#{msg.menu_select}" itemValue="" />
+						<f:selectItems value="#{mbStudents.universityTable}" var="u" itemLabel="#{u.ename}" itemValue="#{u.id}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg.menu_school} - #{msg.lbl_id}" for="Sid" />
+					<p:selectOneMenu value="#{mbStudents.student.shcoolid}" id="Sid" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.menu_school} - #{msg.lbl_id}"
+						validatorMessage="#{msg.msg_validation} - #{msg.menu_school} - #{msg.lbl_id}">
+						<f:selectItem itemLabel="#{msg.menu_select}" itemValue="" />
+						<f:selectItems value="#{mbSchool.table}" var="s" itemLabel="#{s.ename}" itemValue="#{s.id}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg.menu_program} - #{msg.lbl_id}" for="Pid" />
+					<p:selectOneMenu value="#{mbStudents.student.programid}" id="Pid" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.menu_program} - #{msg.lbl_id}"
+						validatorMessage="#{msg.msg_validation} - #{msg.menu_program} - #{msg.lbl_id}">
+						<f:selectItem itemLabel="#{msg.menu_select}" itemValue="" />
+						<f:selectItems value="#{mbProgram.table}" var="p" itemLabel="#{p.ename}" itemValue="#{p.programid}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg.lbl_final_avg}" for="finalAvg" />
+					<p:inputText id="finalAvg" value="#{mbStudents.student.finalAvg}" decimalPlaces="0" decimalSeparator=" " thousandSeparator=" "
+						required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_final_avg}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_final_avg}" />
+
+					<p:outputLabel value="#{msg.lbl_max_avg}" for="maxAvg" />
+					<p:inputText id="maxAvg" value="#{mbStudents.student.maxAvg}" decimalPlaces="0" decimalSeparator=" " thousandSeparator=" "
+						required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_max_avg}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_max_avg}" />
+
+					<p:outputLabel value="#{msg.lbl_rate}" for="rate" />
+					<p:inputText id="rate" value="#{mbStudents.student.rate}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_rate}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_rate}" />
+
+					<p:outputLabel value="#{msg.lbl_graduate_year}" for="graduateYear" />
+					<p:inputNumber id="graduateYear" value="#{mbStudents.student.graduateYear}" decimalPlaces="0" decimalSeparator=" "
+						thousandSeparator=" " required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_graduate_year}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_graduate_year}" />
+
+					<p:outputLabel value="#{msg.lbl_graduate_sem}" for="graduateSem" />
+					<p:inputNumber id="graduateSem" value="#{mbStudents.student.graduateSem}" decimalPlaces="0" decimalSeparator=" " thousandSeparator=" "
+						required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_graduate_sem}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_graduate_sem}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbStudents.save()}" ajax="false" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

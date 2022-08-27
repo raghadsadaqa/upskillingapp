@@ -1,0 +1,19 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Home page</ui:define>
+
+	<ui:define name="content">
+		<p:panelGrid columns="2">
+
+			<h:outputText
+				value="#{msg.msg_page}">
+			</h:outputText>
+			
+			<h:graphicImage value="/resources/image/dsc_1784.jpg" />
+
+		</p:panelGrid>
+	</ui:define>
+
+</ui:composition>

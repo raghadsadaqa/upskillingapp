@@ -1,0 +1,52 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Adding Course</ui:define>
+
+	<ui:define name="content">
+
+		<div align="center">
+			<p:spacer height="50" />
+			<h:form id="courseform">
+				<p:growl showDetail="true">
+					<p:autoUpdate />
+				</p:growl>
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="#{msg.menu_add_training_course}"/>
+					</f:facet>
+
+					<p:outputLabel value="#{msg.lbl_id}" for="id" />
+					<p:inputNumber id="id" value="#{mbCourse.courses.courseid}" decimalPlaces="0" decimalSeparator=" " thousandSeparator=" " required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.lbl_id}" />
+
+					<p:outputLabel value="#{msg.lbl_aname}" for="aname" />
+					<p:inputText id="aname" value="#{mbCourse.courses.aname}" required="true" 
+					requiredMessage="#{msg.msg_required} - #{msg.lbl_aname}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_aname}" />
+
+					<p:outputLabel value="#{msg.lbl_ename}" for="ename" />
+					<p:inputText id="ename" value="#{mbCourse.courses.ename}" required="true" 
+					requiredMessage="#{msg.msg_required} - #{msg.lbl_ename}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_ename}" />
+
+					<p:outputLabel value="#{msg.lbl_max_student}" for="NUM" />
+					<p:inputNumber id="NUM" value="#{mbCourse.courses.maxstudent}" required="true" 
+					requiredMessage="#{msg.msg_required} - #{msg.lbl_max_student}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_max_student}" />
+
+					<p:outputLabel value="#{msg.lbl_short_desc}" for="SD" />
+					<p:inputText id="SD" value="#{mbCourse.courses.shortDescr}" required="true" 
+					requiredMessage="#{msg.msg_required} - #{msg.lbl_short_desc}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_short_desc}"/>
+
+					<p:outputLabel value="#{msg.lbl_detailed_desc}" for="DD" />
+					<p:inputText id="DD" value="#{mbCourse.courses.detailedDesc}" required="true"
+					 requiredMessage="#{msg.msg_required} - #{msg.lbl_detailed_desc}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_detailed_desc}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbCourse.save()}" ajax="false" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+			</div>
+	</ui:define>
+</ui:composition>
+

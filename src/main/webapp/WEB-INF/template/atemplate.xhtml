@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{mbLog.lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+<f:view locale="#{mbLog.locale}">
+
+	<h:head>
+		<title><ui:insert name="title"> HTU </ui:insert></title>
+		<link rel="icon" type="image/png" href="#{resource['image/HTULogo.png']}" />
+	</h:head>
+	
+	
+	<h:body dir="#{mbLog.dir}">
+
+		<h:outputStylesheet name="java.css" library="css" />
+
+		<p:panel id="pnl">
+
+			<f:facet name="header">
+				<h:graphicImage value="/resources/image/HTULogo-250px.png"></h:graphicImage>
+			</f:facet>
+
+			<p:growl showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
+
+			<p:panel id="contentpnl" rendered="#{mbLog.logon}" style="min-height: 400px;">
+
+				<h:form id="menuform">
+					<p:menubar styleClass="#{mbLog.lang.equals('ar')?'ui-menu-ar':'ui-menu-en'}">
+
+						<p:menuitem value="#{msg.menu_home}" outcome="/screen.xhtml" />
+
+						<p:submenu label="#{msg.menu_tables}">
+							<p:menuitem value="#{msg.menu_university}" outcome="/items/university.xhtml" />
+							<p:menuitem value="#{msg.menu_school}" outcome="/items/school.xhtml" />
+							<p:menuitem value="#{msg.menu_program}" outcome="/items/program.xhtml" />
+							<p:menuitem value="#{msg.menu_training_course}" outcome="/items/courses.xhtml" />
+							<p:menuitem value="#{msg.menu_student}" outcome="/items/student.xhtml" />
+							<p:menuitem value="#{msg.menu_stc}" outcome="/items/studenttrainingcourse.xhtml" />
+							<p:menuitem value="#{msg.menu_student_result}" outcome="/items/student-result.xhtml" />
+						</p:submenu>
+
+						<p:submenu label="#{msg.menu_adding}">
+							<p:menuitem value="#{msg.menu_add_university}" outcome="/items/add-university.xhtml" />
+							<p:menuitem value="#{msg.menu_add_school}" outcome="/items/add-school.xhtml" />
+							<p:menuitem value="#{msg.menu_add_program}" outcome="/items/add-program.xhtml" />
+							<p:menuitem value="#{msg.menu_add_training_course}" outcome="/items/add-course.xhtml" />
+							<p:menuitem value="#{msg.menu_add_student}" outcome="/items/add-student.xhtml" />
+							<p:menuitem value="#{msg.menu_add_student_result}" outcome="/items/add-student-result.xhtml" />
+						</p:submenu>
+						
+						<p:menuitem value="#{msg.menu_interview}" outcome="/items/interview.xhtml"/>
+						
+						<p:submenu label="#{msg.menu_about}">
+							<p:menuitem value="#{msg.menu_htu}" url="https://htu.edu.jo/" target="_blank"/>
+							<p:menuitem value="#{msg.menu_ict}" url="https://www.htu.edu.jo/#/ICTProgram/ICTProgram" target="_blank"/>
+						</p:submenu>
+
+						<p:menuitem value="#{msg.menu_logout}" action="#{mbLog.logout()}" ajax="false" />
+					</p:menubar>
+				</h:form>
+
+
+				<ui:insert name="content">
+					<h1>....</h1>
+					<h2>....</h2>
+					<h3>....</h3>
+					<h4>....</h4>
+				</ui:insert>
+
+			</p:panel>
+
+
+			<p:panel id="logpnl" rendered="#{!mbLog.logon}" style="min-height: 400px;">
+
+				<h:form id="loginform">
+					<div align="center">
+						<p:spacer height="50" />
+						<p:panelGrid columns="2">
+
+							<f:facet name="header">
+								<p:outputLabel value="#{msg.lbl_login_form}"/>
+							</f:facet>
+
+							<p:outputLabel value="#{msg.lbl_username}" for="user" />
+							<p:inputText id="user" value="#{mbLog.username}" />
+
+							<p:outputLabel value="#{msg.lbl_password}" for="password" />
+							<p:password id="password" value="#{mbLog.password}" />
+
+							<f:facet name="footer">
+								<p:commandButton value="#{msg.btn_login}" action="#{mbLog.checkUser()}" ajax="false" />
+								<p:commandButton value="#{msg.btn_reset}" type="reset" />
+
+								<p:selectOneMenu value="#{mbLog.lang}" onchange="submit()" valueChangeListener="#{mbLog.localeChanged}">
+									<f:selectItems value="#{mbLog.countries}" />
+								</p:selectOneMenu>
+							</f:facet>
+
+						</p:panelGrid>
+					</div>
+				</h:form>
+			</p:panel>
+
+
+
+			<f:facet name="footer">
+				<p:outputLabel value="#{msg.lbl_copyright}" styleClass="footer" />
+			</f:facet>
+
+		</p:panel>
+
+	</h:body>
+	
+</f:view>
+</html>

@@ -1,0 +1,93 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">editable School</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="EschoolForm">
+			<p:panel>
+				<p:dataTable value="#{mbSchool.table}" var="s" id="t" stickyHeader="true" sortMode="multiple" filteredValue="#{mbSchool.table}"
+					editable="true" editMode="cell" widgetVar="Stable">
+
+					<f:facet name="header">
+						<h:outputText value="#{msg.btn_edit} - #{msg.menu_school}" />
+					</f:facet>
+
+					<p:ajax event="cellEdit" listener="#{mbSchool.cellEditable()}" />
+
+					<p:column headerText="#{msg.lbl_id}" sortBy="#{s.id}" filterBy="#{s.id}" filterMatchMode="contains">
+						<h:outputText value="#{s.id}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_aname}" sortBy="#{s.aname}" filterBy="#{s.aname}" filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{s.aname}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:inputText value="#{s.aname}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_ename}" sortBy="#{s.ename}" filterBy="#{s.ename}" filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{s.ename}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:inputText value="#{s.ename}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="#{msg.btn_edit}">
+						<p:commandButton value="#{msg.btn_edit}" update=":EschoolForm:editpnl" onclick="PF('schooldlg').show()">
+							<f:setPropertyActionListener value="#{s}" target="#{mbSchool.school}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="#{msg.btn_remove}">
+						<p:commandButton value="#{msg.btn_remove}" action="#{mbSchool.deleteSchool()}" ajax="false">
+							<f:setPropertyActionListener value="#{s}" target="#{mbSchool.school}" />
+						</p:commandButton>
+					</p:column>
+
+
+					<f:facet name="footer">
+						<h:outputText value="#{msg.lbl_total} - #{msg.menu_school} : #{mbSchool.table.size()} " />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+			
+			<p:contextMenu for="t" widgetVar="Smenu">
+			<p:menuitem value="edit cell" icon="pi pi-search" onclick="PF('Stable').showCellEditor();return false" />
+			<p:menuitem value="Hide menu" icon="pi pi-times" onclick="PF('Smenu').hide()"/>
+			</p:contextMenu>
+			
+			
+
+			<p:dialog header="Edit School" widgetVar="schooldlg">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="#{msg.lbl_id}" />
+					<h:outputText value="#{mbSchool.school.id}" />
+
+					<p:outputLabel value="#{msg.lbl_aname}" />
+					<h:inputText value="#{mbSchool.school.aname}" />
+
+					<p:outputLabel value="#{msg.lbl_ename}" />
+					<h:inputText value="#{mbSchool.school.ename}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbSchool.updateSchool()}" ajax="false" />
+						<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('schooldlg').hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

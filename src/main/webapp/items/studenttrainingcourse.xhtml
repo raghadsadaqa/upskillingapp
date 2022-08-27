@@ -1,0 +1,115 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Student Training Course</ui:define>
+
+	<ui:define name="content">
+		<p:spacer height="50" />
+		<p:tabView id="tabview">
+
+			<p:tab title="#{msg.menu_add_stc}">
+				<h:form id="STCForm">
+
+					<p:growl showDetail="true">
+						<p:autoUpdate />
+					</p:growl>
+
+					<p:panelGrid columns="7">
+						<f:facet name="header">
+							<h:outputText value="#{msg.menu_add_stc}" />
+						</f:facet>
+
+						<p:outputLabel value="#{msg.menu_student} - #{msg.lbl_id}" for="stuid" />
+						<p:inputText id="stuid" value="#{mbStudentTrainingCourse.studentTrainingCourse.student.studentid}" required="true"
+							requiredMessage="#{msg.msg_required} - #{msg.menu_student} - #{msg.lbl_id}"
+							validatorMessage="#{msg.msg_validation} - #{msg.menu_student} - #{msg.lbl_id}" />
+
+						<p:outputLabel value="#{msg.menu_training_course} - #{msg.lbl_id}" for="couid" />
+						<p:selectOneMenu id="couid" value="#{mbStudentTrainingCourse.studentTrainingCourse.trainingCourses.courseid}" required="true"
+							requiredMessage="#{msg.msg_required} - #{msg.menu_training_course} - #{msg.lbl_id}"
+							validatorMessage="#{msg.msg_validation} - #{msg.menu_training_course} - #{msg.lbl_id}">
+							<f:selectItem itemLabel="#{msg.menu_select}" itemValue="" />
+							<f:selectItems value="#{mbStudentTrainingCourse.trainingCourseTable}" var="co" itemLabel="#{co.ename}" itemValue="#{co.courseid}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{msg.lbl_priority}" for="p" />
+						<p:inputText id="p" value="#{mbStudentTrainingCourse.studentTrainingCourse.priority}" required="true"
+							requiredMessage="#{msg.msg_required} - #{msg.lbl_priority}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_priority}" />
+
+						<p:commandButton value="#{msg.btn_save}" action="#{mbStudentTrainingCourse.Save()}" ajax="false" />
+
+					</p:panelGrid>
+				</h:form>
+			</p:tab>
+
+			<p:tab id="tab2" title="#{msg.menu_stc}">
+				<h:form id="STCForm1">
+					<p:dataTable id="tbl" value="#{mbStudentTrainingCourse.table}" var="stc">
+						<f:facet name="header">
+							<h:outputText value="#{msg.menu_stc}" styleClass="java.css" />
+						</f:facet>
+
+						<p:column headerText="#{msg.menu_student}" sortBy="#{stc.student.studentid}" filterBy="#{stc.student.studentid}"
+							filterMatchMode="contains">
+							<h:outputText value="#{stc.student.studentid}- #{stc.student.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}" />
+							<h:outputText value="#{stc.student.studentid}- #{stc.student.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}" />
+							<h:outputText value="#{stc.student.studentid}- #{stc.student.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}" />
+						</p:column>
+
+						<p:column headerText="#{msg.menu_training_course}" sortBy="#{stc.trainingCourses.courseid}" filterBy="#{stc.trainingCourses.courseid}"
+							filterMatchMode="contains">
+							<h:outputText value="#{stc.trainingCourses.courseid} - #{stc.trainingCourses.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}" />
+							<h:outputText value="#{stc.trainingCourses.courseid} - #{stc.trainingCourses.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}" />
+							<h:outputText value="#{stc.trainingCourses.courseid} - #{stc.trainingCourses.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}" />
+						</p:column>
+
+						<p:column headerText="#{msg.lbl_priority}">
+							<h:outputText value="#{stc.priority}" />
+						</p:column>
+
+						<p:column headerText="#{msg.btn_edit}">
+							<p:commandButton value="#{msg.btn_edit}" type="button" update=":STCForm2:editpnl" onclick="PF('stcdlg').show()">
+								<f:setPropertyActionListener value="#{stc}" target="#{mbStudentTrainingCourse.studentTrainingCourse}" />
+							</p:commandButton>
+						</p:column>
+
+						<p:column headerText="#{msg.btn_remove}">
+							<p:commandButton value="#{msg.btn_remove}" action="#{mbStudentTrainingCourse.DeleteSTC()}" process="@this" update=":tabview:STCForm1:tbl">
+								<f:setPropertyActionListener value="#{stc}" target="#{mbStudentTrainingCourse.studentTrainingCourse}" />
+							</p:commandButton>
+						</p:column>
+
+						<f:facet name="footer">
+							<h:outputText value="#{msg.lbl_total} - #{msg.menu_stc}: #{mbStudentTrainingCourse.table.size()}" />
+						</f:facet>
+
+					</p:dataTable>
+				</h:form>
+			</p:tab>
+
+		</p:tabView>
+
+		<p:dialog header="#{msg.btn_edit} - #{msg.menu_stc}" widgetVar="stcdlg">
+			<h:form id="STCForm2">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="#{msg.menu_student}" />
+					<h:outputText value="#{mbStudentTrainingCourse.studentTrainingCourse.student.ename}" />
+
+					<p:outputLabel value="#{msg.menu_training_course} " />
+					<h:inputText value="#{mbStudentTrainingCourse.studentTrainingCourse.trainingCourses.ename}" />
+
+					<p:outputLabel value="#{msg.lbl_priority}" />
+					<h:inputText value="#{mbStudentTrainingCourse.studentTrainingCourse.priority}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbStudentTrainingCourse.Update()}" ajax="false" />
+						<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('stcdlg').hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

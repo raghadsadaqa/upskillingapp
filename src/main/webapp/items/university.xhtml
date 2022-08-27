@@ -1,0 +1,75 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="title">Universities</ui:define>
+	
+	<ui:define name="content">
+	
+	<h:form id="UniForm">
+		<p:panel>
+			<p:dataTable value="#{mbUniversity.table}" var="u">
+				<f:facet name="header">
+					<h:outputText value="#{msg.menu_university}"/>
+				</f:facet>
+
+				<p:column headerText="#{msg.lbl_id}" sortBy="#{u.id}" filterBy="#{u.id}" filterMatchMode="contains">
+					<h:outputText value="#{u.id}" />
+				</p:column>
+
+				<p:column headerText="#{msg.lbl_aname}" sortBy="#{u.aname}" filterBy="#{u.aname}" filterMatchMode="contains">
+					<h:outputText value="#{u.aname}" />
+				</p:column>
+
+				<p:column headerText="#{msg.lbl_ename}" sortBy="#{u.ename}" filterBy="#{u.ename}" filterMatchMode="contains">
+					<h:outputText value="#{u.ename}" />
+				</p:column>
+
+				<p:column headerText="#{msg.lbl_website}" sortBy="#{u.website}" filterBy="#{u.website}" filterMatchMode="contains">
+					<h:link value="#{u.website}" type="link"/>
+				</p:column>
+
+				<p:column headerText="#{msg.btn_edit}">
+					<p:commandButton value="#{msg.btn_edit}" update=":UniForm:editpnl" onclick="PF('Unidlg').show()">
+					<f:setPropertyActionListener value="#{u}" target="#{mbUniversity.university}"/>
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="#{msg.btn_remove}">
+					<p:commandButton value="#{msg.btn_remove}" action="#{mbUniversity.deleteUni()}" ajax="false">
+						<f:setPropertyActionListener value="#{u}" target="#{mbUniversity.university}" />
+					</p:commandButton>
+				</p:column>
+
+				<f:facet name="footer">
+					<h:outputText value="#{msg.lbl_total} - #{msg.menu_university} : #{mbUniversity.table.size()} " />
+				</f:facet>
+			</p:dataTable>
+			
+			<p:commandButton value="#{msg.btn_report}" action="#{mbUniversity.runUniReport()}" ajax="false" />
+			
+		</p:panel>
+
+		<p:dialog header="Edit University" widgetVar="Unidlg">
+			<p:panelGrid id="editpnl" columns="2">
+
+				<p:outputLabel value="#{msg.lbl_id}" />
+				<h:outputText value="#{mbUniversity.university.id}" />
+
+				<p:outputLabel value="#{msg.lbl_aname}" />
+				<h:inputText value="#{mbUniversity.university.aname}" />
+
+				<p:outputLabel value="#{msg.lbl_ename}" />
+				<h:inputText value="#{mbUniversity.university.ename}" />
+
+				<p:outputLabel value="#{msg.lbl_website}" />
+				<h:inputText value="#{mbUniversity.university.website}" />
+
+				<f:facet name="footer">
+					<p:commandButton value="#{msg.btn_save}" action="#{mbUniversity.updateUni()}" ajax="false" />
+					<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('Unidlg').hide()" />
+				</f:facet>
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+	</ui:define>
+</ui:composition>

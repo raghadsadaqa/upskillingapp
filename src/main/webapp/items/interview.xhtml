@@ -1,0 +1,56 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Interviews</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="InterviewForm">
+			<p:panel>
+				<p:dataTable value="#{mbInterview.table}" var="i">
+					<f:facet name="header">
+						<h:outputText value="Interviews" />
+					</f:facet>
+
+					<p:column headerText="#{msg.menu_student} - #{msg.lbl_id}" sortBy="#{i.student.studentid}"
+						filterBy="#{i.student.studentid}" filterMatchMode="contains">
+						<h:outputText value="#{i.student.studentid}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_ename}" sortBy="#{i.student.ename}"
+						filterBy="#{i.student.ename}" filterMatchMode="contains">
+						<h:outputText value="#{i.student.ename}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_aname}" sortBy="#{i.student.aname}"
+						filterBy="#{i.student.aname}" filterMatchMode="contains">
+						<h:outputText value="#{i.student.aname}" />
+					</p:column>
+
+					<p:column headerText="Accepted Flag" sortBy="#{i.studentResult.acceptedFlag}"
+						filterBy="#{i.studentResult.acceptedFlag}" filterMatchMode="contains">
+						<h:outputText value="#{i.studentResult.acceptedFlag}" />
+					</p:column>
+
+					<p:column headerText="Interview Date">
+						<p:calendar value="#{i.interviewDate}" />
+					</p:column>
+
+					<p:column headerText="Interview Time">
+						<p:inputText value="#{i.interviewTime}" />
+					</p:column>
+					
+					<p:column headerText="Interview Place">
+						<p:inputText value="#{i.interviewPlace}" />
+					</p:column>
+					
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbInterview.save()}" ajax="false" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

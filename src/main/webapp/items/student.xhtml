@@ -1,0 +1,171 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Students</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="StudentForm">
+
+			<p:tabView>
+				<p:tab title="#{msg.lbl_serach_by}">
+
+					<p:panelGrid columns="3">
+						<p:outputLabel value="#{msg.lbl_enter}" />
+						<p:inputText value="#{mbStudents.student.studentid}" />
+						<p:commandButton value="#{msg.btn_search}" action="#{mbStudents.searchByStudent()}" ajax="false" />
+					</p:panelGrid>
+
+					<p:spacer height="10" />
+
+					<p:panelGrid id="editpnl" columns="6">
+
+						<p:outputLabel value="#{msg.lbl_aname}" />
+						<p:inputText value="#{mbStudents.student.aname}" />
+
+						<p:outputLabel value="#{msg.lbl_ename}" />
+						<p:inputText value="#{mbStudents.student.ename}" />
+
+						<p:outputLabel value="#{msg.lbl_mobile}" />
+						<p:inputText value="#{mbStudents.student.mobile}" />
+
+						<p:outputLabel value="#{msg.lbl_birthdate}" />
+						<p:calendar value="#{mbStudents.student.birthDate}" />
+
+						<p:outputLabel value="#{msg.lbl_sex}" />
+						<h:outputText value="#{mbStudents.student.sex}" />
+
+						<p:outputLabel value="#{msg.lbl_email}" />
+						<p:inputText value="#{mbStudents.student.email}" />
+
+						<p:outputLabel value="#{msg.menu_university} - #{msg.lbl_id}" />
+						<p:inputText value="#{mbStudents.student.university.id}" />
+
+						<p:outputLabel value="#{msg.menu_school} - #{msg.lbl_id}" />
+						<p:inputText value="#{mbStudents.student.shcoolid}" />
+
+						<p:outputLabel value="#{msg.menu_program} - #{msg.lbl_id}" />
+						<p:inputText value="#{mbStudents.student.programid}" />
+
+						<p:outputLabel value="#{msg.lbl_final_avg}" />
+						<p:inputText value="#{mbStudents.student.finalAvg}" />
+
+						<p:outputLabel value="#{msg.lbl_max_avg}" />
+						<p:inputText value="#{mbStudents.student.maxAvg}" />
+
+						<p:outputLabel value="#{msg.lbl_rate}" />
+						<p:inputText value="#{mbStudents.student.rate}" />
+
+						<p:outputLabel value="#{msg.lbl_graduate_year}" />
+						<p:inputText value="#{mbStudents.student.graduateYear}" />
+
+						<p:outputLabel value="#{msg.lbl_graduate_sem}" />
+						<p:inputText value="#{mbStudents.student.graduateSem}" />
+
+						<f:facet name="footer">
+							<p:commandButton value="#{msg.btn_save}" action="#{mbStudents.updateStudent()}" ajax="false" />
+						</f:facet>
+					</p:panelGrid>
+
+				</p:tab>
+
+
+
+				<p:tab title="#{msg.lbl_all_student}">
+					<p:dataTable value="#{mbStudents.table}" var="q">
+
+						<p:column headerText="#{msg.menu_student} - #{msg.lbl_id}" sortBy="#{q.studentid}">
+							<h:outputText value="#{q.studentid}" />
+						</p:column>
+
+						<p:column headerText="#{msg.menu_student} - name" sortBy="#{q.aname}">
+							<h:outputText value="#{q.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}"/>
+							<h:outputText value="#{q.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}"/>
+							<h:outputText value="#{q.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}"/>
+						</p:column>
+
+						<p:column headerText="#{msg.menu_university}" sortBy="#{q.university.ename}">
+							<h:outputText value="#{q.university.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}"/>
+							<h:outputText value="#{q.university.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}"/>
+							<h:outputText value="#{q.university.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}"/>
+						</p:column>
+
+						<p:column headerText="#{msg.menu_school}" sortBy="#{q.school.ename}">
+							<h:outputText value="#{q.school.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}" />
+							<h:outputText value="#{q.school.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}" />
+							<h:outputText value="#{q.school.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}" />
+						</p:column>
+
+						<p:column headerText="#{msg.menu_program}" sortBy="#{q.program.ename}">
+							<h:outputText value="#{q.program.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}" />
+							<h:outputText value="#{q.program.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}" />
+							<h:outputText value="#{q.program.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}" />
+						</p:column>
+
+						<p:column headerText="#{msg.lbl_final_avg}" sortBy="#{q.finalAvg}">
+							<h:outputText value="#{q.finalAvg}" />
+						</p:column>
+
+						<p:column headerText="#{msg.lbl_max_avg}" sortBy="#{q.maxAvg}">
+							<h:outputText value="#{q.maxAvg}" />
+						</p:column>
+
+						<p:column headerText="#{msg.lbl_rate}" sortBy="#{q.rate}">
+							<h:outputText value="#{q.rate}" />
+						</p:column>
+
+						<p:column headerText="More Info">
+							<p:commandButton value="..." update=":StudentForm:stuPnl" onclick="PF('stuDlg').show()">
+								<f:setPropertyActionListener value="#{q}" target="#{mbStudents.selectedStudent}" />
+							</p:commandButton>
+						</p:column>
+
+						<p:column headerText="#{msg.btn_remove}">
+							<p:commandButton value="#{msg.btn_remove}" action="#{mbStudents.deleteStudent()}" ajax="false">
+								<f:setPropertyActionListener value="#{q}" target="#{mbStudents.student}" />
+							</p:commandButton>
+						</p:column>
+						
+						<p:column headerText="#{msg.btn_report}">
+							<p:commandButton value="#{msg.btn_report}" action="#{mbStudents.runStudentReport()}" ajax="false">
+								<f:setPropertyActionListener value="#{q}" target="#{mbStudents.student}" />
+							</p:commandButton>
+						</p:column>
+												
+					</p:dataTable>
+			
+				</p:tab>
+
+			</p:tabView>
+
+			<p:dialog header="stu" widgetVar="stuDlg" modal="true">
+				<p:panelGrid id="stuPnl" columns="4">
+
+					<p:outputLabel value="Student Mobile Number" />
+					<h:outputText value="#{mbStudents.selectedStudent.mobile}" />
+
+					<p:outputLabel value="Student Birthdate" />
+					<h:outputText value="#{mbStudents.selectedStudent.birthDate}" />
+
+					<p:outputLabel value="Student Sex" />
+					<h:outputText value="#{mbStudents.selectedStudent.sex}" />
+
+					<p:outputLabel value="Student Email" />
+					<h:outputText value="#{mbStudents.selectedStudent.email}" />
+
+					<p:outputLabel value="Graduate Year" />
+					<h:outputText value="#{mbStudents.selectedStudent.graduateYear}" />
+
+					<p:outputLabel value="Graduate Semester" />
+					<h:outputText value="#{mbStudents.selectedStudent.graduateSem}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('stuDlg').hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

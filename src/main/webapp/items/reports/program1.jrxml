@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="program1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40d6bc0c-f140-4d57-9a6c-c35d0caa2a9e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ScottXE"/>
+	<style name="StyleHeader" mode="Opaque" forecolor="#D41525" hTextAlign="Center" vTextAlign="Middle" fontName="Serif" fontSize="12" isBold="true">
+		<box>
+			<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="StyleField" hTextAlign="Left" vTextAlign="Middle" fontSize="10">
+		<box>
+			<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+		<paragraph leftIndent="4"/>
+	</style>
+	<style name="StyleVar" hTextAlign="Center" vTextAlign="Middle" fontSize="10" isBold="true">
+		<box>
+			<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="p_image" class="java.lang.Object"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT P.SCHOOL_ID, P.PROGRAM_ID, P.PROGRAM_ANAME,
+P.PROGRAM_ENAME, S.SCHOOL_ANAME, S.SCHOOL_ENAME
+FROM PROGRAM P JOIN SCHOOL S
+ON (P.SCHOOL_ID = S.SCHOOL_ID)]]>
+	</queryString>
+	<field name="SCHOOL_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOL_ID"/>
+	</field>
+	<field name="PROGRAM_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="PROGRAM_ID"/>
+	</field>
+	<field name="SCHOOL_ENAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOL_ENAME"/>
+	</field>
+	<field name="PROGRAM_ANAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PROGRAM_ANAME"/>
+	</field>
+	<field name="PROGRAM_ENAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PROGRAM_ENAME"/>
+	</field>
+	<field name="SCHOOL_ANAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="SCHOOL_ANAME"/>
+	</field>
+	<variable name="programCount" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{PROGRAM_ID}]]></variableExpression>
+	</variable>
+	<variable name="schoolCount" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{SCHOOL_ENAME}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="20" width="201" height="31" forecolor="#D41525" uuid="b355083f-fd19-45e2-87bc-6a843741cae3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Program Report]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="480" y="60" width="95" height="21" forecolor="#D41525" uuid="5830ab95-70d0-4fd1-b6ae-35784e403aa1"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="24" y="0" width="121" height="81" uuid="0d3b218a-dc54-4bfe-a3f8-20b34720cc25"/>
+				<imageExpression><![CDATA[$P{p_image}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement style="StyleHeader" x="0" y="0" width="141" height="30" uuid="6a28518a-bfbe-4758-9439-50b6b39eb538">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e0c53d0-d9c1-49b9-99d9-d7458bfce0b5"/>
+				</reportElement>
+				<text><![CDATA[PROGRAM_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="StyleHeader" x="141" y="0" width="138" height="30" uuid="fb7ee529-490c-4030-aea4-4385200ea5df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d292c36e-2ec8-4a55-95a5-47101ce9bc04"/>
+				</reportElement>
+				<text><![CDATA[SCHOOL_ENAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="StyleHeader" x="279" y="0" width="138" height="30" uuid="852ca341-bb80-407b-8933-81cac510d2e4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="edf80877-49b1-40c2-a9ea-46937d6a2d46"/>
+				</reportElement>
+				<text><![CDATA[PROGRAM_ANAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="StyleHeader" x="417" y="0" width="138" height="30" uuid="907c69c1-993b-459b-a543-c376684f0429">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8088cb58-307f-4de5-b63f-c37e5fb37007"/>
+				</reportElement>
+				<text><![CDATA[PROGRAM_ENAME]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement style="StyleField" x="0" y="0" width="141" height="30" uuid="59869a83-88cd-4d7d-89c9-da025019beca">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e0c53d0-d9c1-49b9-99d9-d7458bfce0b5"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{PROGRAM_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="StyleField" x="141" y="0" width="138" height="30" uuid="11748c12-c322-4960-8f8d-1bd128228128">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d292c36e-2ec8-4a55-95a5-47101ce9bc04"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{SCHOOL_ENAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="StyleField" x="279" y="0" width="138" height="30" uuid="6537dc96-7173-45e5-9b4f-3d9db61f7965">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="edf80877-49b1-40c2-a9ea-46937d6a2d46"/>
+				</reportElement>
+				<textElement>
+					<font fontName="arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROGRAM_ANAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="StyleField" x="417" y="0" width="138" height="30" uuid="f29b5649-ebab-4d5f-a167-748e66cce703">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8088cb58-307f-4de5-b63f-c37e5fb37007"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{PROGRAM_ENAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="9" width="201" height="31" forecolor="#D41525" uuid="5d38f3ed-d99b-4001-b0cf-e52d3edcf2c8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="14"/>
+				</textElement>
+				<text><![CDATA[Al-Hussein Technical University ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement style="StyleVar" x="0" y="0" width="141" height="30" uuid="48899b4c-cf46-40cd-b242-5b80c06984a2"/>
+				<textFieldExpression><![CDATA[$V{programCount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,31 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panel id="pnl" rendered="#{!mbLog.logon}" style="min-height: 400px;">
+
+		<h:form id="form">
+			<div align="center">
+				<p:spacer height="100" />
+				<p:panelGrid columns="2">
+
+					<f:facet name="header">
+						<p:outputLabel value="Login" />
+					</f:facet>
+
+					<p:outputLabel value="Username" for="user" />
+					<h:inputText id="user" value="#{mbLog.username}" />
+
+					<p:outputLabel value="Password" for="password" />
+					<p:password id="password" value="#{mbLog.password}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Login" action="#{mbLog.checkUser()}" ajax="false" />
+						<p:commandButton value="Reset" type="reset" />
+					</f:facet>
+
+				</p:panelGrid>
+			</div>
+		</h:form>
+	</p:panel>
+</ui:composition>

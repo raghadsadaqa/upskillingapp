@@ -1,0 +1,58 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Adding Student Result</ui:define>
+
+	<ui:define name="content">
+		<div align="center">
+			<p:spacer height="50" />
+			<h:form id="srform">
+				<p:growl showDetail="true">
+					<p:autoUpdate />
+				</p:growl>
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="#{msg.menu_add_student_result}" styleClass="java.css" />
+					</f:facet>
+
+					<p:outputLabel value="#{msg.menu_student} - #{msg.lbl_id}" for="Sid" />
+					<p:inputText id="Sid" value="#{mbSResult.result.student.studentid}" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.menu_student} - #{msg.lbl_id}"
+						validatorMessage="#{msg.msg_validation} - #{msg.menu_student} - #{msg.lbl_id}" />
+
+					<p:outputLabel value="#{msg.menu_training_course} - #{msg.lbl_id}" for="cid" />
+					<p:selectOneMenu value="#{mbSResult.result.trainingCourses.courseid}" id="cid" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.menu_training_course} - #{msg.lbl_id}"
+						validatorMessage="#{msg.msg_validation} - #{msg.menu_training_course} - #{msg.lbl_id}">
+						<f:selectItem itemLabel="#{msg.menu_select}" itemValue="" />
+						<f:selectItems value="#{mbCourse.table}" var="c" itemLabel="#{c.ename}" itemValue="#{c.courseid}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{msg.lbl_e_mark}" for="emark" />
+					<p:inputText id="emark" value="#{mbSResult.result.engMark}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_e_mark}"
+						validatorMessage="#{msg.msg_validation} - #{msg.lbl_e_mark}" />
+
+					<p:outputLabel value="#{msg.lbl_in_mark}" for="interviewMark" />
+					<p:inputText id="interviewMark" value="#{mbSResult.result.interviewMark}" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.lbl_in_mark}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_in_mark}" />
+
+					<p:outputLabel value="#{msg.lbl_accepted_flag}" for="acceptedFlag" />
+					<p:selectOneRadio id="acceptedFlag" value="#{mbSResult.result.acceptedFlag}" required="true"
+						requiredMessage="#{msg.msg_required} - #{msg.lbl_accepted_flag}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_accepted_flag}">
+						<f:selectItem itemLabel="Pass" itemValue="1" />
+						<f:selectItem itemLabel="Failed" itemValue="2" />
+					</p:selectOneRadio>
+
+
+					<p:outputLabel value="#{msg.lbl_notes}" for="notes" />
+					<p:inputText id="notes" value="#{mbSResult.result.notes}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbSResult.save()}" ajax="false" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

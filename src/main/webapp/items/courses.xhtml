@@ -1,0 +1,113 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Courses</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="CourseForm">
+			<p:panel>
+				<p:dataTable value="#{mbCourse.table}" var="c">
+					<f:facet name="header">
+						<h:outputText value="#{msg.menu_training_course}" />
+					</f:facet>
+
+					<p:column headerText="#{msg.lbl_id}" sortBy="#{c.courseid}" filterBy="#{c.courseid}" filterMatchMode="contains">
+						<h:outputText value="#{c.courseid}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_aname}" sortBy="#{c.aname}" filterBy="#{c.aname}" filterMatchMode="contains">
+						<h:outputText value="#{c.aname}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_ename}" sortBy="#{c.ename}" filterBy="#{c.ename}" filterMatchMode="contains">
+						<h:outputText value="#{c.ename}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_max_student}" sortBy="#{c.maxstudent}" filterBy="#{c.maxstudent}" filterMatchMode="contains">
+						<h:outputText value="#{c.maxstudent}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_short_desc}" sortBy="#{c.shortDescr}">
+						<p:commandButton value="Show" update=":CourseForm:showspnl" onclick="PF('sdlg').show()">
+							<f:setPropertyActionListener value="#{c}" target="#{mbCourse.courses}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_detailed_desc}" sortBy="#{c.detailedDesc}">
+						<p:commandButton value="Show" update=":CourseForm:showpnl" onclick="PF('ddlg').show()">
+							<f:setPropertyActionListener value="#{c}" target="#{mbCourse.courses}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="#{msg.btn_edit}">
+						<p:commandButton value="#{msg.btn_edit}" update=":CourseForm:editpnl" onclick="PF('coursedlg').show()">
+							<f:setPropertyActionListener value="#{c}" target="#{mbCourse.courses}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="#{msg.btn_remove}">
+						<p:commandButton value="#{msg.btn_remove}" action="#{mbCourse.deleteCourse()}" ajax="false">
+							<f:setPropertyActionListener value="#{c}" target="#{mbCourse.courses}" />
+						</p:commandButton>
+					</p:column>
+
+
+					<f:facet name="footer">
+						<h:outputText value="#{msg.lbl_total} - #{msg.menu_training_course} : #{mbCourse.table.size()} " />
+					</f:facet>
+				</p:dataTable>
+				
+				<p:commandButton value="#{msg.btn_report}" action="#{mbCourse.runCourseReport()}" ajax="false" />
+				
+			</p:panel>
+
+			<p:dialog header="Edit School" widgetVar="coursedlg">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="#{msg.lbl_id}" />
+					<h:outputText value="#{mbCourse.courses.courseid}" />
+
+					<p:outputLabel value="#{msg.lbl_aname}" />
+					<p:inputText value="#{mbCourse.courses.aname}" />
+
+					<p:outputLabel value="#{msg.lbl_ename}" />
+					<p:inputText value="#{mbCourse.courses.ename}" />
+
+					<p:outputLabel value="#{msg.lbl_max_student}" />
+					<p:inputNumber value="#{mbCourse.courses.maxstudent}" />
+
+					<p:outputLabel value="#{msg.lbl_short_desc}" />
+					<p:inputTextarea value="#{mbCourse.courses.shortDescr}" />
+
+					<p:outputLabel value="#{msg.lbl_detailed_desc}" />
+					<p:inputTextarea value="#{mbCourse.courses.detailedDesc}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbCourse.updateCourse()}" ajax="false" />
+						<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('coursedlg').hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</p:dialog>
+
+
+			<p:dialog header="#{msg.lbl_detailed_desc}" widgetVar="ddlg">
+				<div align="center">
+					<p:panelGrid id="showpnl">
+						<h:outputText value="#{mbCourse.courses.detailedDesc}" />
+					</p:panelGrid>
+				</div>
+			</p:dialog>
+
+			<p:dialog header="#{msg.lbl_short_desc}" widgetVar="sdlg">
+				<div align="center">
+					<p:panelGrid id="showspnl">
+						<h:outputText value="#{mbCourse.courses.shortDescr}" />
+					</p:panelGrid>
+				</div>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

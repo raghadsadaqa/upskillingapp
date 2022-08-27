@@ -1,0 +1,84 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Programs</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="ProgramForm">
+			<p:panel>
+				<p:dataTable value="#{mbProgram.table}" var="p">
+					<f:facet name="header">
+						<h:outputText value="#{msg.menu_program}" />
+					</f:facet>
+
+					<p:column headerText="#{msg.menu_program} - #{msg.lbl_id}" sortBy="#{p.programid}" filterBy="#{p.programid}" filterMatchMode="contains">
+						<h:outputText value="#{p.programid}" />
+					</p:column>
+
+					<p:column headerText="#{msg.menu_school} - #{msg.lbl_id}" sortBy="#{p.school.ename}" filterBy="#{p.school.ename}"
+						filterMatchMode="contains">
+						<h:outputText value="#{p.school.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}" />
+						<h:outputText value="#{p.school.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}" />
+						<h:outputText value="#{p.school.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_aname}" sortBy="#{p.aname}" filterBy="#{p.aname}" filterMatchMode="contains">
+						<h:outputText value="#{p.aname}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_ename}" sortBy="#{p.ename}" filterBy="#{p.ename}" filterMatchMode="contains">
+						<h:outputText value="#{p.ename}" />
+					</p:column>
+
+
+
+					<p:column headerText="#{msg.btn_edit}">
+						<p:commandButton value="#{msg.btn_edit}" update=":ProgramForm:editpnl" onclick="PF('programdlg').show()">
+							<f:setPropertyActionListener value="#{p}" target="#{mbProgram.program}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="#{msg.btn_remove}">
+						<p:commandButton value="#{msg.btn_remove}" action="#{mbProgram.deleteProgram()}" ajax="false">
+							<f:setPropertyActionListener value="#{p}" target="#{mbProgram.program}" />
+						</p:commandButton>
+					</p:column>
+
+
+					<f:facet name="footer">
+						<h:outputText value="#{msg.lbl_total} - #{msg.menu_program} : #{mbProgram.table.size()} " />
+					</f:facet>
+				</p:dataTable>
+
+				<p:commandButton value="#{msg.btn_report}" action="#{mbProgram.runProgramReport()}" ajax="false" />
+
+
+			</p:panel>
+
+			<p:dialog header="Edit Program" widgetVar="programdlg">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="#{msg.menu_program} - #{msg.lbl_id}" />
+					<h:outputText value="#{mbProgram.program.programid}" />
+
+					<p:outputLabel value="#{msg.menu_school} - #{msg.lbl_id}" />
+					<h:outputText value="#{mbProgram.program.school.id}" />
+
+					<p:outputLabel value="#{msg.lbl_aname}" />
+					<h:inputText value="#{mbProgram.program.aname}" />
+
+					<p:outputLabel value="#{msg.lbl_ename}" />
+					<h:inputText value="#{mbProgram.program.ename}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbProgram.updateProgram()}" ajax="false" />
+						<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('programdlg').hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

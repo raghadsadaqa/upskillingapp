@@ -1,0 +1,87 @@
+
+@font-face {
+    font-family: 'Noto Kufi Arabic';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/upskilling/resources/fonts/NotoKufiArabic-Regular.ttf)
+        format('truetype');
+}
+
+@font-face {
+    font-family: 'Noto Kufi Arabic';
+    font-style: normal;
+    font-weight: 700;
+    src: url(/upskilling/resources/fonts/NotoKufiArabic-Bold.ttf)
+        format('truetype');
+}
+
+.ui-widget {
+    font-size: 0.96em !important;
+    font-family: 'Noto Kufi Arabic', serif;
+}
+
+.ui-widget-header {
+    border: 1px solid #f27900;
+    background: #c18920;
+    color: white;
+    font-weight: bold;
+}
+
+.ui-panel-title {
+    margin: 0.1em 0px 0.2em 0 !important;
+}
+
+.ui-panel .ui-panel-footer {
+    text-align: center !important;
+    background: #c18920; 
+    color: #c18920;
+}
+
+.ui-growl {
+    right: 50%;
+    margin-right: -150px;
+}
+
+.footer {
+	color: white;
+    font-weight: bold;
+}
+
+.ui-menu-ar {
+	
+}
+
+.ui-menu-ar .ui-menuitem {
+	float: right !important;
+}
+
+.ui-menu-ar .ui-menuitem-text {
+	float: right !important;
+}
+
+.ui-menu-ar .ui-menu-child {
+	top: 25px;
+	right: 0 !important;
+	width: 20em !important;
+}
+
+.ui-menu-ar .ui-menuitem-icon {
+	float: right !important;
+}
+
+
+.main {
+	background-image: url("/resources/image/background.jpg");
+}
+
+
+
+
+
+
+
+
+
+
+
+ 

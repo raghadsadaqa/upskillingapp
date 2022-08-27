@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="university" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f972bc3f-8ad0-4e48-8951-5b9022f790fe">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ScottXE"/>
+	<style name="StyleHeader" mode="Opaque" forecolor="#FFFFFF" backcolor="#D44442" hTextAlign="Center" vTextAlign="Middle" fontSize="12" isBold="true">
+		<box>
+			<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="StyleField" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" hTextAlign="Left" vTextAlign="Middle" fontSize="10">
+		<box>
+			<pen lineWidth="1.0" lineStyle="Dashed"/>
+			<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#A13630"/>
+			<leftPen lineWidth="1.0" lineStyle="Dashed" lineColor="#A13630"/>
+			<bottomPen lineWidth="1.0" lineStyle="Dashed" lineColor="#A13630"/>
+			<rightPen lineWidth="1.0" lineStyle="Dashed" lineColor="#A13630"/>
+		</box>
+		<paragraph leftIndent="4"/>
+	</style>
+	<parameter name="p_image" class="java.lang.Object"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * 
+FROM UNIVERSITY]]>
+	</queryString>
+	<field name="UNIVERSITY_ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="UNIVERSITY_ID"/>
+	</field>
+	<field name="UNIVERSITY_ANAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="UNIVERSITY_ANAME"/>
+	</field>
+	<field name="UNIVERSITY_ENAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="UNIVERSITY_ENAME"/>
+	</field>
+	<field name="WEBSITE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="WEBSITE"/>
+	</field>
+	<variable name="UniSum" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{UNIVERSITY_ID}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="172" y="11" width="220" height="41" forecolor="#D44442" uuid="8d8da485-1e46-4812-8521-765e45c2a456"/>
+				<textElement>
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[University Report]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="485" y="61" width="81" height="16" forecolor="#D44442" uuid="8b2f71ae-c153-4643-81ea-77f1bf79cd69"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="11" y="6" width="121" height="71" uuid="afdb3502-48e4-42ba-8c01-203cb5932ace"/>
+				<imageExpression><![CDATA[$P{p_image}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement style="StyleHeader" x="0" y="0" width="141" height="30" uuid="e44c9066-06f2-40a6-8a18-ac7789055075">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e4e153e-3ed6-4a20-bf05-cc9dfcdaf8a7"/>
+				</reportElement>
+				<text><![CDATA[UNIVERSITY_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="StyleHeader" x="141" y="0" width="138" height="30" uuid="2ebe8bf5-a314-480b-8298-8f7ba01e0e09">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e542797d-2f0f-425a-997c-751b9171e1b4"/>
+				</reportElement>
+				<text><![CDATA[UNIVERSITY_ANAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="StyleHeader" x="279" y="0" width="138" height="30" uuid="fac3d29f-cbab-4e68-88f0-a52ddb5dcbcd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42f927a3-4cf4-43d1-9d28-a7823bc98706"/>
+				</reportElement>
+				<text><![CDATA[UNIVERSITY_ENAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="StyleHeader" x="417" y="0" width="138" height="30" uuid="618c1ff2-6f2d-4c0f-8294-43b3a02e2946">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f8256ebf-e81c-415a-ae96-153b2e50e5f8"/>
+				</reportElement>
+				<text><![CDATA[WEBSITE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement style="StyleField" x="0" y="0" width="141" height="30" uuid="29eaa2bf-4421-4032-88b0-c6d7eaf15f7a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e4e153e-3ed6-4a20-bf05-cc9dfcdaf8a7"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{UNIVERSITY_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="StyleField" x="141" y="0" width="138" height="30" uuid="91c0198e-ae1b-4d58-b713-30cf2a007a75">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e542797d-2f0f-425a-997c-751b9171e1b4"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+					<paragraph rightIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNIVERSITY_ANAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="StyleField" x="279" y="0" width="138" height="30" uuid="ebf519a2-1eeb-467d-8720-5a1dc71e723f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="42f927a3-4cf4-43d1-9d28-a7823bc98706"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{UNIVERSITY_ENAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="StyleField" x="417" y="0" width="138" height="30" uuid="60ec0b9c-06c6-45db-a1a6-74abb2879887">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f8256ebf-e81c-415a-ae96-153b2e50e5f8"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{WEBSITE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="184" y="20" width="191" height="31" forecolor="#D44442" uuid="24f03a1f-1d68-47a9-846b-e874ede6c9e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al-Hussein Technical University ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="141" height="30" forecolor="#000000" uuid="d5e16795-fb51-4e5f-aef7-3c8b8b15bae3"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{UniSum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

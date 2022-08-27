@@ -1,0 +1,94 @@
+<ui:composition template="/WEB-INF/template/atemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Student Results</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="SResultForm">
+
+			<p:panel>
+				<p:dataTable value="#{mbSResult.table}" var="r">
+					<f:facet name="header">
+						<h:outputText value="#{msg.menu_student_result}" />
+					</f:facet>
+
+					<p:column headerText="#{msg.menu_student} - #{msg.lbl_id}" sortBy="#{r.student.studentid}" filterBy="#{r.student.studentid}"
+						filterMatchMode="contains">
+						<h:outputText value="#{r.student.studentid}" />
+					</p:column>
+
+					<p:column headerText="#{msg.menu_training_course} - #{msg.lbl_id}" sortBy="#{r.trainingCourses.courseid}"
+						filterBy="#{r.trainingCourses.courseid}" filterMatchMode="contains">
+						<h:outputText value="#{r.trainingCourses.courseid} - #{r.trainingCourses.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('en')}" />
+						<h:outputText value="#{r.trainingCourses.courseid} - #{r.trainingCourses.ename}" rendered="#{mbLog.lang.equalsIgnoreCase('tr')}" />
+						<h:outputText value="#{r.trainingCourses.courseid} - #{r.trainingCourses.aname}" rendered="#{mbLog.lang.equalsIgnoreCase('ar')}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_e_mark}" sortBy="#{r.engMark}" filterBy="#{r.engMark}" filterMatchMode="contains">
+						<h:outputText value="#{r.engMark}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_in_mark}" sortBy="#{r.interviewMark}" filterBy="#{r.interviewMark}" filterMatchMode="contains">
+						<h:outputText value="#{r.interviewMark}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_accepted_flag}" sortBy="#{r.acceptedFlag}" filterBy="#{r.acceptedFlag}" filterMatchMode="contains">
+						<h:outputText value="#{r.acceptedFlag}" />
+					</p:column>
+
+					<p:column headerText="#{msg.lbl_notes}" sortBy="#{r.notes}">
+						<h:outputText value="#{r.notes}" />
+					</p:column>
+
+					<p:column headerText="#{msg.btn_edit}">
+						<p:commandButton value="#{msg.btn_edit}" process="@this" update=":SResultForm:editpnl" onclick="PF('sresultdlg').show()">
+							<f:setPropertyActionListener value="#{r}" target="#{mbSResult.result}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="#{msg.btn_remove}">
+						<p:commandButton value="#{msg.btn_remove}" action="#{mbSResult.deleteSResult()}" ajax="false">
+							<f:setPropertyActionListener value="#{r}" target="#{mbSResult.result}" />
+						</p:commandButton>
+					</p:column>
+
+
+					<f:facet name="footer">
+						<h:outputText value="#{msg.lbl_total} - #{msg.menu_student_result} : #{mbSResult.table.size()}" />
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog header="Edit Result" widgetVar="sresultdlg">
+				<p:panelGrid id="editpnl" columns="2">
+
+					<p:outputLabel value="#{msg.menu_student} - #{msg.lbl_id}" />
+					<h:outputText value="#{mbSResult.result.student.studentid}" />
+
+					<p:outputLabel value="#{msg.menu_training_course} - #{msg.lbl_id}" />
+					<h:inputText value="#{mbSResult.result.trainingCourses.courseid}" />
+
+					<p:outputLabel value="#{msg.lbl_e_mark}" />
+					<h:inputText value="#{mbSResult.result.engMark}" />
+
+					<p:outputLabel value="#{msg.lbl_in_mark}" />
+					<h:inputText value="#{mbSResult.result.interviewMark}" />
+
+					<p:outputLabel value="#{msg.lbl_accepted_flag}" />
+					<h:inputText value="#{mbSResult.result.acceptedFlag}" />
+
+					<p:outputLabel value="#{msg.lbl_notes}" />
+					<h:inputText value="#{mbSResult.result.notes}" />
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbSResult.updateSResult()}" ajax="false" />
+						<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('sresultdlg').hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
