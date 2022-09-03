@@ -33,7 +33,11 @@ public class StudentDAO {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				Student student = new Student(rs.getInt("student_id"), rs.getString("student_aname"), rs.getString("student_ename"), rs.getString("mobile"), rs.getDate("birthdate"), rs.getString("sex"), rs.getString("email"), rs.getInt("school_id"), rs.getInt("program_id"), rs.getDouble("final_average"), rs.getDouble("max_average"), rs.getString("rate"), rs.getInt("graduate_year"), rs.getInt("graduate_sem"));
+				Student student = new Student(rs.getInt("student_id"), rs.getString("student_aname"), 
+						rs.getString("student_ename"), rs.getString("mobile"), rs.getDate("birthdate"), rs.getString("sex"),
+						rs.getString("email"), rs.getInt("school_id"), rs.getInt("program_id"), rs.getDouble("final_average"),
+						rs.getDouble("max_average"), rs.getString("rate"), rs.getInt("graduate_year"),
+						rs.getInt("graduate_sem"));
 				
 				UniDAO uniDAO = new UniDAO();
 				University university = uniDAO.selectByid(rs.getInt("university_id"));

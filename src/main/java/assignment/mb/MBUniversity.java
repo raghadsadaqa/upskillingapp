@@ -17,13 +17,14 @@ import util.Message;
 
 @ManagedBean(name = "mbUniversity")
 @ViewScoped
-public class MBUniversity {
+public class MBUniversity {	
 	
 	private University university;
 	private UniDAO dao;
 	private List<University> Table;
+	//make getters and setters for parameters
 	
-	
+	//show data from sql database
 	@PostConstruct
 	public void init() {
 		dao = new UniDAO();
@@ -31,6 +32,7 @@ public class MBUniversity {
 		university = new University();
 	}
 	
+	//insert new row in table
 	public String save() {
 		dao = new UniDAO();
 		dao.insert(university);
@@ -40,12 +42,14 @@ public class MBUniversity {
 		return null;
 	}
 	
+	//Update data in table
 	public String updateUni() {
 		dao.update(university);
 		Table = dao.selectALL();
 		return null;
 	}
 	
+	//Delete data in table
 	public String deleteUni() {
 		dao.delete(university.getId());
 		Table = dao.selectALL();

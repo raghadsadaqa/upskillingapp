@@ -8,8 +8,8 @@
 		<title><ui:insert name="title"> HTU </ui:insert></title>
 		<link rel="icon" type="image/png" href="#{resource['image/HTULogo.png']}" />
 	</h:head>
-	
-	
+
+
 	<h:body dir="#{mbLog.dir}">
 
 		<h:outputStylesheet name="java.css" library="css" />
@@ -49,12 +49,15 @@
 							<p:menuitem value="#{msg.menu_add_student}" outcome="/items/add-student.xhtml" />
 							<p:menuitem value="#{msg.menu_add_student_result}" outcome="/items/add-student-result.xhtml" />
 						</p:submenu>
-						
-						<p:menuitem value="#{msg.menu_interview}" outcome="/items/interview.xhtml"/>
-						
+
+						<p:submenu label="#{msg.menu_interview}">
+							<p:menuitem value="#{msg.menu_interview}" outcome="/items/interview.xhtml" />
+							<p:menuitem value="add" outcome="/items/add-interview.xhtml" />
+						</p:submenu>
+
 						<p:submenu label="#{msg.menu_about}">
-							<p:menuitem value="#{msg.menu_htu}" url="https://htu.edu.jo/" target="_blank"/>
-							<p:menuitem value="#{msg.menu_ict}" url="https://www.htu.edu.jo/#/ICTProgram/ICTProgram" target="_blank"/>
+							<p:menuitem value="#{msg.menu_htu}" url="https://htu.edu.jo/" target="_blank" />
+							<p:menuitem value="#{msg.menu_ict}" url="https://www.htu.edu.jo/#/ICTProgram/ICTProgram" target="_blank" />
 						</p:submenu>
 
 						<p:menuitem value="#{msg.menu_logout}" action="#{mbLog.logout()}" ajax="false" />
@@ -80,7 +83,7 @@
 						<p:panelGrid columns="2">
 
 							<f:facet name="header">
-								<p:outputLabel value="#{msg.lbl_login_form}"/>
+								<p:outputLabel value="#{msg.lbl_login_form}" />
 							</f:facet>
 
 							<p:outputLabel value="#{msg.lbl_username}" for="user" />
@@ -112,6 +115,6 @@
 		</p:panel>
 
 	</h:body>
-	
+
 </f:view>
 </html>

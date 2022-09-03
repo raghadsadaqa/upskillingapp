@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.imageio.ImageIO;
 
 import assignment.bean.TrainingCourses;
@@ -14,6 +15,7 @@ import assignment.dao.TraCouDAO;
 import reports.Reports;
 import util.Message;
 
+@ViewScoped
 @ManagedBean(name = "mbCourse")
 public class MBTrainingCourse {
 	

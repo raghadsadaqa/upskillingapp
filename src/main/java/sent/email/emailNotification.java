@@ -1,5 +1,4 @@
-package assignment.mb;
-
+package sent.email;
 
 import java.util.Properties;
 
@@ -11,24 +10,30 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+public class emailNotification implements Notification {
 
-public class Email {
 
-    private static String USER_NAME = "raghadsadaqa27@gmail.com";  // GMail user name (just the part before "@gmail.com")
-    private static String PASSWORD = "**"; // GMail password
-    private static String RECIPIENT = "raghad.sada@yahoo.com";
+	private static String USER_NAME = "Farahaltahan992@gmail.com";
+	private static String PASSWORD = "wopakatrgsryjoyi";
+	private static String RECIPIENT = "Farahaltahan992@gmail.com";
 
-	public static void main(String[] args) {
+	@Override
+	public void notifyUser() {
+
 		String from = USER_NAME;
 		String pass = PASSWORD;
-		String[] to = { RECIPIENT }; // list of recipient email addresses
+		String[] to = { RECIPIENT };
 		String subject = "Java send mail example";
-		String body = "Welcome to JavaMail!";
+		String body = "Welcome to JavaMail 2\n Upskilling Program\n JSE & JEE";
 
 		sendFromGMail(from, pass, to, subject, body);
+
+		System.out.println("Email sent successfully");
 	}
 
-	private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
+	private static void sendFromGMail(String from, String pass, String[] to,
+			String subject, String body) {
+
 		Properties props = System.getProperties();
 		String host = "smtp.gmail.com";
 		props.put("mail.smtp.starttls.enable", "true");

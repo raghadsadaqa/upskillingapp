@@ -13,43 +13,55 @@
 						<h:outputText value="Interviews" />
 					</f:facet>
 
-					<p:column headerText="#{msg.menu_student} - #{msg.lbl_id}" sortBy="#{i.student.studentid}"
-						filterBy="#{i.student.studentid}" filterMatchMode="contains">
-						<h:outputText value="#{i.student.studentid}" />
-					</p:column>
-
-					<p:column headerText="#{msg.lbl_ename}" sortBy="#{i.student.ename}"
-						filterBy="#{i.student.ename}" filterMatchMode="contains">
-						<h:outputText value="#{i.student.ename}" />
-					</p:column>
-
-					<p:column headerText="#{msg.lbl_aname}" sortBy="#{i.student.aname}"
-						filterBy="#{i.student.aname}" filterMatchMode="contains">
-						<h:outputText value="#{i.student.aname}" />
-					</p:column>
-
-					<p:column headerText="Accepted Flag" sortBy="#{i.studentResult.acceptedFlag}"
-						filterBy="#{i.studentResult.acceptedFlag}" filterMatchMode="contains">
-						<h:outputText value="#{i.studentResult.acceptedFlag}" />
+					<p:column headerText="#{msg.menu_student}" sortBy="#{i.student.studentid}" filterBy="#{i.student.studentid}" filterMatchMode="contains">
+						<h:outputText value="#{i.student.studentid} - #{i.student.ename}" />
 					</p:column>
 
 					<p:column headerText="Interview Date">
-						<p:calendar value="#{i.interviewDate}" />
+						<p:calendar value="#{i.interviewDate}" pattern="dd/MM/yyyy" />
 					</p:column>
 
-					<p:column headerText="Interview Time">
-						<p:inputText value="#{i.interviewTime}" />
+					<p:column headerText="Start Time">
+						<p:calendar value="#{i.startTime}" pattern="dd/MM/yyyy - hh:mm"/>
 					</p:column>
-					
-					<p:column headerText="Interview Place">
-						<p:inputText value="#{i.interviewPlace}" />
+
+					<p:column headerText="End Time">
+						<p:calendar value="#{i.endTime}" pattern="dd/MM/yyyy - hh:mm"/>
 					</p:column>
-					
+
+					<p:column headerText="#{msg.btn_edit}">
+						<p:commandButton value="#{msg.btn_edit}" update=":InterviewForm:editpnl" onclick="PF('interviewdlg').show()">
+							<f:setPropertyActionListener value="#{i}" target="#{mbInterview.interview}" />
+						</p:commandButton>
+					</p:column>
+
 					<f:facet name="footer">
-						<p:commandButton value="#{msg.btn_save}" action="#{mbInterview.save()}" ajax="false" />
+						<h:outputText value="#{msg.lbl_total} - #{msg.menu_interview} : #{mbInterview.table.size()} " />
 					</f:facet>
 				</p:dataTable>
 			</p:panel>
+
+			<p:dialog header="Edit" widgetVar="interviewdlg">
+				<p:panelGrid columns="2" id="editpnl">
+					<p:outputLabel value="#{msg.menu_student}" />
+					<h:outputText value="#{mbInterview.interview.student.studentid}" />
+
+					<p:outputLabel value="interview Date" />
+					<p:calendar value="#{mbInterview.interview.interviewDate}" pattern="dd/MM/yyyy"/>
+
+					<p:outputLabel value="Start Time" />
+					<p:calendar value="#{mbInterview.interview.startTime}" pattern="dd/MM/yyyy - hh:mm"/>
+
+					<p:outputLabel value="End Time" />
+					<p:calendar value="#{mbInterview.interview.endTime}" pattern="dd/MM/yyyy - hh:mm"/>
+
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.btn_save}" action="#{mbInterview.updateInterview()}" ajax="false" />
+						<p:commandButton value="#{msg.btn_back}" type="button" onclick="PF('interviewdlg').hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</p:dialog>
+
 
 		</h:form>
 	</ui:define>

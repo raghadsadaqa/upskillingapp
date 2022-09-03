@@ -20,7 +20,6 @@ public class UniDAO {
 
 	public List<University> selectALL() {
 		UniTable = new ArrayList<University>();
-		
 		try {
 			db = new Database();
 			connection = db.getConnection();
@@ -29,7 +28,8 @@ public class UniDAO {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				University university = new University(rs.getInt("university_id"), rs.getString("university_aname"), rs.getString("university_ename"), rs.getString("website"));
+				University university = new University(rs.getInt("university_id"), rs.getString("university_aname"), 
+						rs.getString("university_ename"), rs.getString("website"));
 				UniTable.add(university);
 			}
 			
@@ -40,9 +40,7 @@ public class UniDAO {
 			Database.close(ps);
 			Database.close(connection);
 		}
-
 		return UniTable;
-
 	}
 
 	public University selectByid(int id) {
@@ -52,7 +50,8 @@ public class UniDAO {
 			db = new Database();
 			connection = db.getConnection();
 			ps = connection.prepareStatement(
-					"select university_id, university_aname, university_ename, website from university where university_id = ?  order by university_id");
+					"select university_id, university_aname, university_ename, website from university "
+					+ "where university_id = ?  order by university_id");
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
@@ -144,3 +143,5 @@ public class UniDAO {
 	}
 
 }
+
+

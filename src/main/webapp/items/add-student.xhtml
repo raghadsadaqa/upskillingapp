@@ -15,20 +15,20 @@
 					<f:facet name="header">
 						<h:outputText value="#{msg.menu_add_student}" />
 					</f:facet>
-					
-					
+
+
 					<p:outputLabel value="#{msg.menu_student} - #{msg.lbl_id}" for="id" />
-					<p:inputNumber id="id" value="#{mbStudents.student.studentid}" decimalPlaces="0" decimalSeparator=" " thousandSeparator=" "
+					<p:inputText id="id" value="#{mbStudents.student.studentid}" decimalPlaces="0" decimalSeparator=" " thousandSeparator=" "
 						required="true" requiredMessage="#{msg.msg_required} - #{msg.menu_student} - #{msg.lbl_id}"
 						validatorMessage="#{msg.msg_validation} - #{msg.menu_student} - #{msg.lbl_id}" />
-					
-					
-					
+
+
+
 					<p:outputLabel value="#{msg.lbl_aname}" for="aname" />
 					<p:inputText id="aname" value="#{mbStudents.student.aname}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_aname}"
 						validatorMessage="#{msg.msg_validation} - #{msg.lbl_aname}" />
-						
-						
+
+
 					<p:outputLabel value="#{msg.lbl_ename}" for="ename" />
 					<p:inputText id="ename" value="#{mbStudents.student.ename}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_ename}"
 						validatorMessage="#{msg.msg_validation} - #{msg.lbl_ename}" />
@@ -41,14 +41,13 @@
 
 					<p:outputLabel value="#{msg.lbl_birthdate}" for="birthdate" />
 					<p:calendar id="birthdate" value="#{mbStudents.student.birthDate}" required="true"
-						requiredMessage="#{msg.msg_required} - #{msg.lbl_birthdate}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_birthdate}" 
-						/>
+						requiredMessage="#{msg.msg_required} - #{msg.lbl_birthdate}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_birthdate}" />
 
 					<p:outputLabel value="#{msg.lbl_sex}" for="sex" />
 					<p:selectOneRadio id="sex" value="#{mbStudents.student.sex}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_sex}"
 						validatorMessage="#{msg.msg_validation} - #{msg.lbl_sex}">
-						<f:selectItem itemLabel="Male" itemValue="1" />
-						<f:selectItem itemLabel="Female" itemValue="2" />
+						<f:selectItem itemLabel="#{msg.lbl_male}" itemValue="1" />
+						<f:selectItem itemLabel="#{msg.lbl_female}" itemValue="2" />
 					</p:selectOneRadio>
 
 					<p:outputLabel value="#{msg.lbl_email}" for="email" />

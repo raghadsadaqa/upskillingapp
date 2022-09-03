@@ -1,6 +1,6 @@
 package assignment.bean;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Interview {
 
@@ -21,11 +21,6 @@ public class Interview {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
-
-
-
-
-
 
 
 	public Student getStudent() {

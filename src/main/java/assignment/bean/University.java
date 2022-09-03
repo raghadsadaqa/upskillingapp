@@ -7,42 +7,25 @@ public class University {
 	private String ename;
 	private String website;
 
-	
-	
-	public University(String aname, String ename, String website) {
-		this.aname = aname;
-		this.ename = ename;
-		this.website = website;
-	}
-
-
 	public University(int id, String aname, String ename, String website) {
 		this.id = id;
 		this.aname = aname;
 		this.ename = ename;
 		this.website = website;
 	}
-
-
 	public University() {
-
 	}
-	
 	public University(int id) {
 		this.id = id;
 	}
-
-
+	
+	//Getter and Setter
 	public int getId() {
 		return id;
 	}
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 	public String getAname() {
 		return aname;
 	}

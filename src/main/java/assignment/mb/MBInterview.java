@@ -24,15 +24,11 @@ public class MBInterview {
 	List<Interview> table;
 	
 	List<Student> studentTable;
-	List<StudentResult> studentresultTable;
 	
 	@PostConstruct
 	public void init() {
 		StudentDAO studentDAO = new StudentDAO();
 		studentTable = studentDAO.selectALL();
-		
-		StudentResultDAO studentResultDAO = new StudentResultDAO();
-		studentresultTable = studentResultDAO.selectALL();
 		
 		dao = new InterviewDAO();
 		table = dao.selectAll();
@@ -46,9 +42,6 @@ public class MBInterview {
 		StudentDAO studentDAO = new StudentDAO();
 		studentTable = studentDAO.selectALL();
 		
-		StudentResultDAO studentResultDAO = new StudentResultDAO();
-		studentresultTable = studentResultDAO.selectALL();
-		
 		dao = new InterviewDAO();
 		dao.insert(interview);
 		interview = new Interview();
@@ -61,8 +54,11 @@ public class MBInterview {
 	}
 	
 	public String updateInterview() {
+		dao = new InterviewDAO();
 		dao.update(interview);
 		table = dao.selectAll();
+		interview = new Interview();
+
 		return null;
 	}
 
@@ -101,14 +97,6 @@ public class MBInterview {
 	}
 
 
-	public List<StudentResult> getStudentresultTable() {
-		return studentresultTable;
-	}
-
-
-	public void setStudentresultTable(List<StudentResult> studentresultTable) {
-		this.studentresultTable = studentresultTable;
-	}
 
 	
 	
