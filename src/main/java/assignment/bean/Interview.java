@@ -16,6 +16,15 @@ public class Interview {
 	}
 
 
+	
+	
+	public Interview(Student student) {
+		this.student = student;
+	}
+
+
+
+
 	public Interview(Date interviewDate, Date startTime, Date endTime) {
 		this.interviewDate = interviewDate;
 		this.startTime = startTime;

@@ -51,6 +51,38 @@ public class InterviewDAO {
 		return table;
 	}
 	
+	
+	public Interview selectById(int id){
+		Interview interview = null;
+		try {
+			db = new Database();
+			connection = db.getConnection();
+			ps = connection.prepareStatement("select student_id, INTERVIEW_DATE, start_time, end_time from interview order by student_id");
+		
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				interview = new Interview(rs.getDate("interview_date"), rs.getDate("start_time"), rs.getDate("end_time"));
+				
+				StudentDAO studentDAO = new StudentDAO();
+				Student student = studentDAO.selectById(rs.getInt("student_id"));
+				interview.setStudent(student);
+			}
+			
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			Database.close(rs);
+			Database.close(ps);
+			Database.close(connection);
+		}
+		
+		return interview;
+	}
+	
+	
 	public int insert(Interview interview) {
 		try {
 			db = new Database();

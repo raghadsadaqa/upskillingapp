@@ -2,7 +2,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="title">Adding School</ui:define>
+	<ui:define name="title">Adding Interview</ui:define>
 
 	<ui:define name="content">
 		<div align="center">
@@ -19,17 +19,18 @@
 					<p:outputLabel value="#{msg.menu_student}" for="stu"/>
 					<p:inputNumber id="stu" value="#{mbInterview.interview.student.studentid}"/>
 					
-					<p:outputLabel value="interview date" for="Idate"/>
+					<p:outputLabel value="#{msg.lbl_interview_date}" for="Idate"/>
 					<p:calendar id="Idate" value="#{mbInterview.interview.interviewDate}" required="true" 
 					requiredMessage="#{msg.msg_required}" pattern="dd/MM/yyyy"/>
 					
-					<p:outputLabel value="Start time" for="Stime"/>
+					<p:outputLabel value="#{msg.lbl_Start_time}" for="Stime"/>
 					<p:calendar id="Stime" value="#{mbInterview.interview.startTime}" required="true" 
-					requiredMessage="#{msg.msg_required}" pattern="dd/MM/yyyy - hh:mm" />
+					requiredMessage="#{msg.msg_required}" pattern="hh:mm" />
 					
-					<p:outputLabel value="End time" for="Etime"/>
+					
+					<p:outputLabel value="#{msg.lbl_end_time}" for="Etime"/>
 					<p:calendar id="Etime" value="#{mbInterview.interview.endTime}" required="true" 
-					requiredMessage="#{msg.msg_required}" pattern="dd/MM/yyyy - hh:mm"/>
+					requiredMessage="#{msg.msg_required}" pattern="hh:mm"/>
 					
 					<f:facet name="footer">
 					<p:commandButton value="#{msg.btn_save}" action="#{mbInterview.save()}" ajax="false"/>

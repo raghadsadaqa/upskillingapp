@@ -8,10 +8,9 @@ import javax.faces.bean.ViewScoped;
 
 import assignment.bean.Interview;
 import assignment.bean.Student;
-import assignment.bean.StudentResult;
 import assignment.dao.InterviewDAO;
 import assignment.dao.StudentDAO;
-import assignment.dao.StudentResultDAO;
+import util.Email;
 import util.Message;
 
 
@@ -21,6 +20,7 @@ public class MBInterview {
 
 	private Interview interview;
 	private InterviewDAO dao;
+	private Interview selectedInterview;
 	List<Interview> table;
 	
 	List<Student> studentTable;
@@ -33,7 +33,7 @@ public class MBInterview {
 		dao = new InterviewDAO();
 		table = dao.selectAll();
 		interview = new Interview();
-		
+		selectedInterview = new Interview();
 		interview.setStudent(new Student());
 	}
 	
@@ -59,6 +59,13 @@ public class MBInterview {
 		table = dao.selectAll();
 		interview = new Interview();
 
+		return null;
+	}
+	
+	public String sendEmail() {
+		String body = "Dear student, your interview for ICT upskilling program will be on " + selectedInterview.getInterviewDate() +" from " +selectedInterview.getStartTime() +" to " + selectedInterview.getEndTime();
+
+		Email.sendEmail(selectedInterview.getStudent().getEmail(), body);
 		return null;
 	}
 
@@ -94,6 +101,16 @@ public class MBInterview {
 
 	public void setStudentTable(List<Student> studentTable) {
 		this.studentTable = studentTable;
+	}
+
+
+	public Interview getSelectedInterview() {
+		return selectedInterview;
+	}
+
+
+	public void setSelectedInterview(Interview selectedInterview) {
+		this.selectedInterview = selectedInterview;
 	}
 
 
