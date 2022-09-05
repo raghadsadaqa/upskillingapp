@@ -66,6 +66,9 @@ public class MBSTC {
 		studentTrainingCourse.setTrainingCourses(new TrainingCourses());
 		
 		studentTrainingCourse = new StudentTC();
+		
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
@@ -79,7 +82,8 @@ public class MBSTC {
 		/*studentTrainingCourse = new StudentTC();
 		studentTrainingCourse.setStudent(new Student());
 		studentTrainingCourse.setTrainingCourses(new TrainingCourses());*/
-		
+			
+		Message.addMessageByKey("INFO", " ", "msg_save");
 		return null;
 	}
 

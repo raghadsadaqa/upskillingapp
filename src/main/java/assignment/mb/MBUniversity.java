@@ -46,6 +46,8 @@ public class MBUniversity {
 	public String updateUni() {
 		dao.update(university);
 		Table = dao.selectALL();
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
@@ -53,6 +55,8 @@ public class MBUniversity {
 	public String deleteUni() {
 		dao.delete(university.getId());
 		Table = dao.selectALL();
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	

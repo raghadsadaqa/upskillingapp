@@ -41,8 +41,8 @@
 					<p:outputLabel value="#{msg.lbl_accepted_flag}" for="acceptedFlag" />
 					<p:selectOneRadio id="acceptedFlag" value="#{mbSResult.result.acceptedFlag}" required="true"
 						requiredMessage="#{msg.msg_required} - #{msg.lbl_accepted_flag}" validatorMessage="#{msg.msg_validation} - #{msg.lbl_accepted_flag}">
-						<f:selectItem itemLabel="#{msg.lbl_pass}" itemValue="1" />
-						<f:selectItem itemLabel="#{msg.lbl_failed}" itemValue="2" />
+						<f:selectItem itemLabel="#{msg.lbl_pass}" itemValue="#{msg.lbl_pass}" />
+						<f:selectItem itemLabel="#{msg.lbl_failed}" itemValue="#{msg.lbl_failed}" />
 					</p:selectOneRadio>
 
 

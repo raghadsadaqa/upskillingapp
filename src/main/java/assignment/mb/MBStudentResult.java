@@ -72,7 +72,8 @@ public class MBStudentResult {
 		result.setTrainingCourses(new TrainingCourses());
 		
 		table = dao.selectALL();
-		
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
@@ -80,6 +81,7 @@ public class MBStudentResult {
 		dao = new StudentResultDAO();
 		dao.delete(result.getStudent().getStudentid());
 		table = dao.selectALL();
+		Message.addMessageByKey("INFO", " ", "msg_save");
 
 		return null;
 	}

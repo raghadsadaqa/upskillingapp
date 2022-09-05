@@ -59,6 +59,8 @@ public class MBInterview {
 		table = dao.selectAll();
 		interview = new Interview();
 
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
@@ -66,6 +68,9 @@ public class MBInterview {
 		String body = "Dear student, your interview for ICT upskilling program will be on " + selectedInterview.getInterviewDate() +" from " +selectedInterview.getStartTime() +" to " + selectedInterview.getEndTime();
 
 		Email.sendEmail(selectedInterview.getStudent().getEmail(), body);
+		
+		Message.addMessageByKey("INFO", " ", "msg_email");
+
 		return null;
 	}
 

@@ -66,6 +66,8 @@ public class MBStudent {
 		dao.update(student);
 		table = dao.selectALL();
 		student = new Student();
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
@@ -73,6 +75,8 @@ public class MBStudent {
 		dao.delete(student.getStudentid());
 		table = dao.selectALL();
 		student = new Student();
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	

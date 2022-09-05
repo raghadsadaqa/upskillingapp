@@ -42,12 +42,16 @@ public class MBTrainingCourse {
 	public String updateCourse() {
 		dao.update(courses);
 		table = dao.selectALL();
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
 	public String deleteCourse() {
 		dao.delete(courses.getCourseid());
 		table = dao.selectALL();
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	

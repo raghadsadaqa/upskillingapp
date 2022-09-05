@@ -49,12 +49,18 @@ public class MBProgram {
 	public String updateProgram() {
 		dao.update(program);
 		table = dao.selectAll();
+		
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
 	public String deleteProgram() {
 		dao.delete(program.getProgramid());
 		table = dao.selectAll();
+		
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	

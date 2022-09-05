@@ -46,8 +46,8 @@
 					<p:outputLabel value="#{msg.lbl_sex}" for="sex" />
 					<p:selectOneRadio id="sex" value="#{mbStudents.student.sex}" required="true" requiredMessage="#{msg.msg_required} - #{msg.lbl_sex}"
 						validatorMessage="#{msg.msg_validation} - #{msg.lbl_sex}">
-						<f:selectItem itemLabel="#{msg.lbl_male}" itemValue="1" />
-						<f:selectItem itemLabel="#{msg.lbl_female}" itemValue="2" />
+						<f:selectItem itemLabel="#{msg.lbl_male}" itemValue="#{msg.lbl_male}" />
+						<f:selectItem itemLabel="#{msg.lbl_female}" itemValue="#{msg.lbl_female}" />
 					</p:selectOneRadio>
 
 					<p:outputLabel value="#{msg.lbl_email}" for="email" />

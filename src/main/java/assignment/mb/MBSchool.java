@@ -61,12 +61,18 @@ public class MBSchool {
 	public String updateSchool() {
 		dao.update(school);
 		table = dao.selectALL();
+		
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
 	public String deleteSchool() {
 		dao.delete(school.getId());
 		table = dao.selectALL();
+		
+		Message.addMessageByKey("INFO", " ", "msg_save");
+
 		return null;
 	}
 	
