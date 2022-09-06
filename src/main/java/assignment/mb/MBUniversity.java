@@ -1,6 +1,7 @@
 package assignment.mb;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,8 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 
 import assignment.bean.University;
@@ -30,6 +33,14 @@ public class MBUniversity {
 		dao = new UniDAO();
 		Table = dao.selectALL();
 		university = new University();
+	}
+	
+	
+	public void website(University uni) throws IOException{
+		university = uni;
+		System.out.println(university.getWebsite());
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect(university.getWebsite());
 	}
 	
 	//insert new row in table
